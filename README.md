@@ -15,10 +15,9 @@ cp -r dependencies/libcudacxx/include/nv /usr/local/include
 After that, you can run the following commands in the root directory to build Paean.
 
 ```
-mkdir build
-cd build
-cmake ../
-make -j
+mkdir build && cd build
+cmake .. -DCMAKE_BUILD_TYPE=Release
+make -j && make install
 ```
 
 After building Paean we can get two executable binary files `prepare` and `paean`. The `prepare` is used to generate `gene.annotation.gff3` file and `length_table.csv` file shown in the `input` directory. Our strategy for determining the gene length is that we choose the length of the longest transcript in the gene. The `paean` is used for transcriptome quantification.
@@ -70,7 +69,8 @@ Paean generates two kinds of files for TPM and PSI respectively. It is worth not
 We provide default files (gene annotation file and splicing event files) for the user to run Paean. With a bam file you can run Paean in the directory where generated binary file is located as follows:
 
 ```
-./paean -g ../input/gene.annotation.gff3 -l ../input/length_table.csv -r some.bam -x SE,A3SS -y ../input/csv/SE.annotation.csv,../input/csv/A3SS.annotation.csv -o ./ -t 8 -m 2
+cd Paean/Paean-GPU
+paean -g input/gene.annotation.gff3 -l input/length_table.csv -r some.bam -x SE,A3SS -y input/csv/SE.annotation.csv,input/csv/A3SS.annotation.csv -o paean_result -t 8 -m 2
 ```
 Make sure the chromosome naming in BAM file is consistent with that in GFF and CSV file. For example, the chromosome naming in gene annotation file downloaded from Ensembl has no `chr` prefix, so you need to make sure the chromosome naming in BAM file has no `chr` prefix correspondingly.
 
@@ -81,4 +81,4 @@ Paean shallowly supports Multi-GPU. To use this feature, you can set environment
 We also provided the [test data and results](https://github.com/Bio-Acc/Paean-Testdata) used in the benchmark of Paean.
 
 ### Contact
-If you have any question, please contact <guanjw@shanghaitech.edu.cn>.
+If you have any question, please contact <gjw1390@hotmail.com>.
