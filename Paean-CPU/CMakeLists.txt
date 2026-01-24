@@ -49,3 +49,7 @@ target_compile_definitions(paean PUBLIC THRUST_HOST_SYSTEM=THRUST_HOST_SYSTEM_OM
                                         THRUST_DEVICE_SYSTEM=THRUST_DEVICE_SYSTEM_OMP)
 target_include_directories(paean PUBLIC ${THRUST_INCLUDE_DIR})
 target_link_libraries(paean parse OpenMP::OpenMP_CXX)
+
+include(GNUInstallDirs)
+install(TARGETS prepare DESTINATION ${CMAKE_INSTALL_BINDIR})
+install(TARGETS paean DESTINATION ${CMAKE_INSTALL_BINDIR})

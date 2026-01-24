@@ -84,3 +84,7 @@ add_executable(paean ${CMAKE_SOURCE_DIR}/src/gene.cu)
 target_include_directories(paean PRIVATE
     ${CUDA_INCLUDE_DIRS})
 target_link_libraries(paean parse sort)
+
+include(GNUInstallDirs)
+install(TARGETS prepare DESTINATION ${CMAKE_INSTALL_BINDIR})
+install(TARGETS paean DESTINATION ${CMAKE_INSTALL_BINDIR})
